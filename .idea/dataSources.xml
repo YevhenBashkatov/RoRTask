@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Rails RoRTask: production" uuid="33c8e23d-1a82-4dc9-a3fd-2cd772bd4c58">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/RoRTask_production</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails RoRTask: test" uuid="98f1a641-4907-43e3-aec7-5f3940da0e31">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/RoRTask_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails RoRTask: development" uuid="86ed50f2-d5fe-453e-9f09-df10b832bef9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/RoRTask_development</jdbc-url>
+    </data-source>
+  </component>
+</project>
