@@ -3,6 +3,14 @@
 <p>
   <strong>Number:</strong>
   <%= @train.number %>
+  <strong>Current station:</strong>
+  <%= @train.current_station.title %>
+  <% if @train.route_id.present? %>
+    <strong>Current route: </strong>
+    <%= @train.route.name %>
+    <% else %>
+   <strong> Unknown </strong>
+  <%end %>
 </p>
 <p>
 
