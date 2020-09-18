@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_194712) do
+ActiveRecord::Schema.define(version: 2020_09_18_092134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -45,7 +44,11 @@ ActiveRecord::Schema.define(version: 2020_09_15_194712) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "customer_id"
     t.bigint "train_id"
+    t.bigint "first_station_id"
+    t.bigint "last_station_id"
     t.index ["customer_id"], name: "index_tickets_on_customer_id"
+    t.index ["first_station_id"], name: "index_tickets_on_first_station_id"
+    t.index ["last_station_id"], name: "index_tickets_on_last_station_id"
     t.index ["train_id"], name: "index_tickets_on_train_id"
   end
 
