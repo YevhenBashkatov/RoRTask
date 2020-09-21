@@ -1,0 +1,25 @@
+<%= form_with(model: @railway_carriage, local: true) do |form| %>
+  <%= render 'common/errors', resource: @railway_carriage %>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number %>
+    <%= form.collection_select :train_id, Train.all, :id, :number %>
+
+  </div>
+
+  <div class ="field">
+    <%= form.radio_button :carriage_type , 'compartment'%> Сompartment <br/>
+    <%= form.radio_button :carriage_type, 'reverseve_seat'%> Reverseve seat<br/>
+    <%= form.text_field :seats_up %> Up seats <br/>
+    <%= form.text_field :seats_down %> Down seats <br/>
+  </div>
+
+
+  <div class="actions">
+
+    <%= form.submit %>
+  </div>
+
+
+<% end %>

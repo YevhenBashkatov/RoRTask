@@ -3,6 +3,51 @@
 <p>
   <strong>Number:</strong>
   <%= @train.number %>
+  <strong>Current station:</strong>
+  <%= @train.current_station.title %>
+  <% if @train.route_id.present? %>
+    <strong>Current route: </strong>
+    <%= @train.route.name %>
+    <% else %>
+   <strong> Unknown </strong>
+  <%end %>
+</p>
+
+<p>
+  <%@train.railway_carriages.group(:carriage_type).count.each_pair do |key,value| %>
+    <strong><%=key %></strong>
+    <strong><%=value %></strong>
+  <%end %>
+</p>
+
+
+  Free comartment seats:
+  UP: <%=@train.railway_carriages.where("carriage_type = 'compartment'").sum(:seats_up) %>
+  DOWN: <%=@train.railway_carriages.where("carriage_type = 'compartment'").sum(:seats_down) %><br/>
+  Free reverseve seats:
+  UP: <%=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_up) %>
+  DOWN: <%=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_down) %>
+
+</p>
+
+<p>
+  <% if @train.railway_carriages.empty?%>
+    Пусто
+    <%else%>
+  <% @train.railway_carriages.each do |carriage| %>
+      <p><strong>Carriage number:</strong>
+      <%= carriage.number %><br/>
+      <strong>Carriage type:</strong>
+      <%= carriage.carriage_type %> <br/>
+      <strong>Up seats</strong>
+        <%= carriage.seats_up %><br/>
+      <strong>Down seats</strong>
+        <%= carriage.seats_down %><br/>
+      </p>
+    <%end %>
+
+  <%end %>
+
 </p>
 
 <%= link_to 'Edit', edit_train_path(@train) %> |
