@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Carriages</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Number</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'railway_carriages/railway_carriage', collection: @railway_carriages %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Carriage', new_railway_carriage_path %>
+<%= link_to 'Home', welcomes_path %>
