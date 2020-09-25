@@ -1,4 +1,4 @@
-<%= form_with(model: @railway_carriage, local: true) do |form| %>
+<%= form_with(model: @railway_carriage.becomes(RailwayCarriage), local: true) do |form| %>
   <%= render 'common/errors', resource: @railway_carriage %>
 
   <div class="field">
@@ -9,11 +9,18 @@
   </div>
 
   <div class ="field">
-    <%= form.radio_button :carriage_type , 'compartment'%> Сompartment <br/>
-    <%= form.radio_button :carriage_type, 'reverseve_seat'%> Reverseve seat<br/>
+    <%= form.radio_button :type , CoupeRailwayCarriage.name%> Coupe <br/>
+    <%= form.radio_button :type, EconomyRailwayCarriage.name%> Economy<br/>
+    <%= form.radio_button :type, HundaiRailwayCarriage.name%> Hundai<br/>
+    <%= form.radio_button :type, ComfortRailwayCarriage.name%> Comfort<br/>
     <%= form.text_field :seats_up %> Up seats <br/>
-    <%= form.text_field :seats_down %> Down seats <br/>
+    <%= form.text_field :seats_down %> Down seats<br/>
+    <%= form.text_field :side_seats_up %> Up side seats<br/>
+    <%= form.text_field :side_seats_down %> Up side seats<br/>
+    <%= form.text_field :sitting_seats %> Sitting seats<br/>
   </div>
+
+
 
 
   <div class="actions">

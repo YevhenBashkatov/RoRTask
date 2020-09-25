@@ -11,10 +11,11 @@
   </thead>
 
   <tbody>
-  <%= render @railway_carriages %>
+    <%= render partial: 'railway_carriages/railway_carriage', collection: @railway_carriages %>
   </tbody>
 </table>
 
 <br>
 
 <%= link_to 'New Carriage', new_railway_carriage_path %>
+<%= link_to 'Home', welcomes_path %>

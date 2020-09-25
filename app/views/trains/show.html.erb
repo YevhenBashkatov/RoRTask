@@ -13,42 +13,40 @@
   <%end %>
 </p>
 
-<p>
-  <%@train.railway_carriages.group(:carriage_type).count.each_pair do |key,value| %>
-    <strong><%=key %></strong>
-    <strong><%=value %></strong>
-  <%end %>
-</p>
+<!--<p>-->
+  <%#@train.railway_carriages.group(:carriage_type).count.each_pair do |key,value| %>
+<!--    <strong><%#=key %></strong>-->
+<!--    <strong><%#=value %></strong>-->
+  <%#end %>
+<!--</p>-->
 
 
-  Free comartment seats:
-  UP: <%=@train.railway_carriages.where("carriage_type = 'compartment'").sum(:seats_up) %>
-  DOWN: <%=@train.railway_carriages.where("carriage_type = 'compartment'").sum(:seats_down) %><br/>
-  Free reverseve seats:
-  UP: <%=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_up) %>
-  DOWN: <%=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_down) %>
-
-</p>
+<!--  Free comartment seats:-->
+<!--  UP: <%#=@train.railway_carriages.where("carriage_type = 'compartment'").sum(:seats_up) %>-->
+<!--  DOWN: <%#=@train.railway_carriages.where("carriage_type = 'compartment'").sum(:seats_down) %><br/>-->
+<!--  Free reverseve seats:-->
+<!--  UP: <%#=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_up) %>-->
+<!--  DOWN: <%#=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_down) %>-->
 
 <p>
   <% if @train.railway_carriages.empty?%>
     Пусто
     <%else%>
-  <% @train.railway_carriages.each do |carriage| %>
-      <p><strong>Carriage number:</strong>
-      <%= carriage.number %><br/>
-      <strong>Carriage type:</strong>
-      <%= carriage.carriage_type %> <br/>
-      <strong>Up seats</strong>
-        <%= carriage.seats_up %><br/>
-      <strong>Down seats</strong>
-        <%= carriage.seats_down %><br/>
-      </p>
+
+    <% if @train.sorted %>
+      <% @train.railway_carriages.order('number DESC').each do |carriage| %>
+        <li><%=link_to "Carriage N.o #{carriage.number}", railway_carriage_path(carriage) %></li>
+      <%end %>
+
+    <%else %>
+      <% @train.railway_carriages.order('number ASC').each do |carriage| %>
+        <li><%=link_to "Carriage N.o #{carriage.number}", railway_carriage_path(carriage) %></li>
+      <%end %>
     <%end %>
 
   <%end %>
 
-</p>
+
 
 <%= link_to 'Edit', edit_train_path(@train) %> |
 <%= link_to 'Back', trains_path %>

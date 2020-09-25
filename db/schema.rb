@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_113437) do
+ActiveRecord::Schema.define(version: 2020_09_25_101432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,26 +22,30 @@ ActiveRecord::Schema.define(version: 2020_09_21_113437) do
 
   create_table "railway_carriages", force: :cascade do |t|
     t.string "number"
-    t.string "carriage_type"
+    t.integer "side_seats_up"
+    t.integer "side_seats_down"
+    t.integer "sitting_seats"
     t.integer "seats_up"
     t.integer "seats_down"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
     t.bigint "train_id"
-    t.index ["train_id"], name: "index_railway_carriages_on_train_id"
-  end
-
-  create_table "railway_station_routes", force: :cascade do |t|
-    t.integer "railway_station_id"
-    t.integer "route_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["train_id"], name: "index_railway_carriages_on_train_id"
   end
 
   create_table "railway_stations", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "railway_stations_routes", force: :cascade do |t|
+    t.integer "railway_station_id"
+    t.integer "route_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "position"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -69,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_113437) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "current_station_id"
     t.bigint "route_id"
+    t.boolean "sorted"
     t.index ["current_station_id"], name: "index_trains_on_current_station_id"
     t.index ["route_id"], name: "index_trains_on_route_id"
   end

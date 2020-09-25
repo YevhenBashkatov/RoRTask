@@ -6,8 +6,13 @@
     <%= form.text_field :number %>
     <%= form.collection_select :current_station_id, RailwayStation.all, :id, :title %>
     <%= form.collection_select :route_id, Route.all, :id, :name %>
+
     </div>
 
+  <div class="field">
+    <%= form.label 'Tail/Head' %>
+    <%= form.select  :sorted, [true, false] %>
+  </div>
 
 
   <div class="actions">
