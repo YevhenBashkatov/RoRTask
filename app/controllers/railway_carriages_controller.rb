@@ -1,5 +1,6 @@
 class RailwayCarriagesController < ApplicationController
   before_action :set_railway_carriage, only: %i[show edit update destroy]
+  before_action :set_train, only: %i[create update destroy]
 
   def index
     @railway_carriages = RailwayCarriage.all
@@ -12,10 +13,10 @@ class RailwayCarriagesController < ApplicationController
   end
 
   def create
-    @railway_carriage = RailwayCarriage.new(railway_carriage_params)
 
+    @railway_carriage = @train.railway_carriages.new(railway_carriage_params)
     if @railway_carriage.save
-      redirect_to @railway_carriage.becomes(RailwayCarriage)
+      redirect_to @train
     else
       render :new
     end
@@ -40,6 +41,10 @@ class RailwayCarriagesController < ApplicationController
 
   def set_railway_carriage
     @railway_carriage = RailwayCarriage.find(params[:id])
+  end
+
+  def set_train
+    @train = Train.find(params[:train_id])
   end
 
   def railway_carriage_params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_101432) do
+ActiveRecord::Schema.define(version: 2020_09_30_074625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2020_09_25_101432) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position"
+    t.datetime "arrive_time"
+    t.datetime "departure_time"
   end
 
   create_table "routes", force: :cascade do |t|

@@ -29,6 +29,12 @@
 <!--  DOWN: <%#=@train.railway_carriages.where("carriage_type = 'reverseve_seat'").sum(:seats_down) %>-->
 
 <p>
+  <%= link_to "Добавить вагон", new_train_railway_carriage_path(@train) %>
+</p>
+
+
+
+<p>
   <% if @train.railway_carriages.empty?%>
     Пусто
     <%else%>

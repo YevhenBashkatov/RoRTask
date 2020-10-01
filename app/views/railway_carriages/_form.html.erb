@@ -1,32 +1,37 @@
-<%= form_with(model: @railway_carriage.becomes(RailwayCarriage), local: true) do |form| %>
+<%= form_for [@train, @railway_carriage] do |f| %>
   <%= render 'common/errors', resource: @railway_carriage %>
 
-  <div class="field">
-    <%= form.label :number %>
-    <%= form.text_field :number %>
-    <%= form.collection_select :train_id, Train.all, :id, :number %>
-
+  <div class="field carriage_type">
+    <%= select_tag(:type, options_for_select($CARRIAGE_TYPES)) %>
   </div>
 
-  <div class ="field">
-    <%= form.radio_button :type , CoupeRailwayCarriage.name%> Coupe <br/>
-    <%= form.radio_button :type, EconomyRailwayCarriage.name%> Economy<br/>
-    <%= form.radio_button :type, HundaiRailwayCarriage.name%> Hundai<br/>
-    <%= form.radio_button :type, ComfortRailwayCarriage.name%> Comfort<br/>
-    <%= form.text_field :seats_up %> Up seats <br/>
-    <%= form.text_field :seats_down %> Down seats<br/>
-    <%= form.text_field :side_seats_up %> Up side seats<br/>
-    <%= form.text_field :side_seats_down %> Up side seats<br/>
-    <%= form.text_field :sitting_seats %> Sitting seats<br/>
+  <div class="field top_seats seats">
+    <%= f.label :seats_up %><br>
+    <%= f.number_field :seats_up %>
   </div>
 
+  <div class="field bottom_seats seats">
+    <%= f.label :seats_down %><br>
+    <%= f.number_field :seats_down %>
+  </div>
 
+  <div class="field side_top_seats seats">
+    <%= f.label :side_seats_up %><br>
+    <%= f.number_field :side_seats_up %>
+  </div>
 
+  <div class="field side_bottom_seats seats">
+    <%= f.label :side_seats_down %><br>
+    <%= f.number_field :side_seats_down %>
+  </div>
+
+  <div class="field econom_seats seats">
+    <%= f.label :sitting_seats %><br>
+    <%= f.number_field :sitting_seats %>
+  </div>
 
   <div class="actions">
-
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 
-
-<% end %>
+<%end %>

@@ -8,6 +8,12 @@ class Route < ActiveRecord::Base
 
   before_validation :set_name
 
+
+
+  def self.find_by_stations(first_station,last_station)
+    @routes.select(:id).where(railway_stations.title.first == first_station.title && railway_stations.title.last == last_station.title)
+  end
+
   private
 
   def set_name
