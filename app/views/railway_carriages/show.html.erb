@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<strong>Train:</strong>
+<%= @railway_carriage.train.number %>
+  <strong>Carriage Number:</strong>
+  <%= @railway_carriage.number%><br/>
+  <strong>Carriage type</strong>
+  <%= @railway_carriage.class %><br/>
+
+<strong>DOWN:</strong>
+  <%= @railway_carriage.seats_down %><br/>
+
+<strong>UP:</strong>
+  <%= @railway_carriage.seats_up %><br/>
+
+<strong>SIDE UP:</strong>
+  <%= @railway_carriage.side_seats_up %><br/>
+
+<strong>SIDE DOWN:</strong>
+  <%= @railway_carriage.side_seats_down %><br/>
+
+<strong>SITTING:</strong>
+  <%= @railway_carriage.sitting_seats %><br/>
+</p>
+
+<%= link_to 'Edit', edit_railway_carriage_path(@railway_carriage) %> |
+<%= link_to 'Back', railway_carriages_path %>

@@ -2,8 +2,88 @@
 
 <p>
   <strong>Route Name</strong>
-  <%= @route.name %>
+  <%= @route.name%>
 </p>
+
+<!--<p>-->
+<!--  <strong>Список станций на маршруте:</strong>-->
+<!--</p>-->
+
+<!--<p>-->
+  <%# if @route.railway_stations.empty? %>
+<!--  Список пуст-->
+    <%# else %>
+<!--      <ul>-->
+        <%#@route.railway_stations.each do |station|   %>
+<!--        <li><%#= station.title %></li>-->
+        <%# end %>
+<!--      </ul>-->
+  <%#end %>
+
+<!--<p>-->
+<p>
+  <strong>Список станций на маршруте</strong>
+  <% if @route.railway_stations.empty? %>
+    Список пуст
+  <% else %>
+  <table>
+    <thead>
+    <tr>
+      <td width="100px">Name</td>
+      <td>Position</td>
+      <td>Arrive time</td>
+      <td>Departure time</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @route.railway_stations.sorted.each do |station| %>
+    <tr>
+      <td>
+        <%= station.title %>
+      </td>
+      <td>
+        <%= form_tag update_position_railway_station_path(station), method: :patch do %>
+        <%= number_field_tag :position, station.position_in(@route) %>
+        <%= hidden_field_tag :route_id, @route.id  %>
+        <%= submit_tag "Изменить" %>
+        <% end %>
+      </td>
+      <td>
+        <%= form_tag update_arrive_time_railway_station_path(station), method: :patch do %>
+        <%= datetime_field_tag :arrive_time, station.arrive_time_in(@route) %>
+          <%= hidden_field_tag :route_id, @route.id %>
+          <%= submit_tag "Изменить дату" %>
+        <% end %>
+      </td>
+      <td>
+        <%= form_tag update_departure_time_railway_station_path(station), method: :patch do %>
+          <%= datetime_field_tag :departure_time, station.departure_time_in(@route) %>
+          <%= hidden_field_tag :route_id, @route.id %>
+          <%= submit_tag "Изменить дату" %>
+        <% end %>
+      </td>
+    </tr>
+    <%end %>
+
+    </tbody>
+  </table>
+  <%end %>
+</p>
+
+
+  <strong>Список поездов на маршруте:</strong>
+</p>
+
+<p>
+  <% if @route.trains.empty? %>
+    Поездов нет
+  <% else %>
+  <ul>
+    <%@route.trains.each do |train|   %>
+      <li><%= train.number %></li>
+    <% end %>
+  </ul>
+<%end %>
 
 <%= link_to 'Edit', edit_route_path(@route) %> |
 <%= link_to 'Back', routes_path %>

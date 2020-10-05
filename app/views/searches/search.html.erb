@@ -1,0 +1,29 @@
+
+
+<h1>RESULTS</h1>
+
+
+
+<% @routes.each do |route| %>
+    <p>
+      <p>
+        <strong>Departure time</strong>
+        <%= @first_station.departure_time_in(route) %>
+      </p>
+      <p>
+        <strong>Arrive time</strong>
+        <%= @last_station.arrive_time_in(route) %>
+      </p>
+      <% if route.trains.empty? %>
+        Поездов нет
+      <% else %>
+      <ul>
+        <% route.trains.each do |train| %>
+          <li><%=link_to "Train N.o #{train.number}", train_path(train) %>
+
+            <%= link_to "Buy", new_train_ticket_path(train, first_station_id: @first_station.id, last_station_id: @last_station.id) %>
+        <% end %>
+      </ul>
+    <% end %>
+<% end %>
+

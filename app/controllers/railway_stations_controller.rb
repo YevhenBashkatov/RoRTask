@@ -1,5 +1,5 @@
 class RailwayStationsController < ApplicationController
-  before_action :set_railway_station, only: [:show, :edit, :update, :destroy]
+  before_action :set_railway_station, only: %i[show edit update destroy update_position update_arrive_time update_departure_time]
 
   # GET /railway_stations
   # GET /railway_stations.json
@@ -9,8 +9,7 @@ class RailwayStationsController < ApplicationController
 
   # GET /railway_stations/1
   # GET /railway_stations/1.json
-  def show
-  end
+  def show; end
 
   # GET /railway_stations/new
   def new
@@ -18,8 +17,7 @@ class RailwayStationsController < ApplicationController
   end
 
   # GET /railway_stations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /railway_stations
   # POST /railway_stations.json
@@ -61,14 +59,33 @@ class RailwayStationsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_railway_station
-      @railway_station = RailwayStation.find(params[:id])
-    end
+  def update_position
+    @route = Route.find(params[:route_id])
+    @railway_station.update_position(@route, params[:position])
+    redirect_to @route
+  end
 
-    # Only allow a list of trusted parameters through.
-    def railway_station_params
-      params.require(:railway_station).permit(:title)
-    end
+  def update_arrive_time
+    @route = Route.find(params[:route_id])
+    @railway_station.update_arrive_time(@route, params[:arrive_time])
+    redirect_to @route
+  end
+
+  def update_departure_time
+    @route = Route.find(params[:route_id])
+    @railway_station.update_departure_time(@route, params[:departure_time])
+    redirect_to @route
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_railway_station
+    @railway_station = RailwayStation.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def railway_station_params
+    params.require(:railway_station).permit(:title)
+  end
 end

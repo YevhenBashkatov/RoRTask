@@ -10,28 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_194712) do
+ActiveRecord::Schema.define(version: 2020_10_02_183653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
   end
 
-  create_table "railway_station_routes", force: :cascade do |t|
-    t.integer "railway_station_id"
-    t.integer "route_id"
+  create_table "railway_carriages", force: :cascade do |t|
+    t.integer "number"
+    t.integer "side_seats_up"
+    t.integer "side_seats_down"
+    t.integer "sitting_seats"
+    t.integer "seats_up"
+    t.integer "seats_down"
+    t.string "type"
+    t.bigint "train_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["train_id"], name: "index_railway_carriages_on_train_id"
   end
 
   create_table "railway_stations", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "railway_stations_routes", force: :cascade do |t|
+    t.integer "railway_station_id"
+    t.integer "route_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "position"
+    t.datetime "arrive_time"
+    t.datetime "departure_time"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -45,7 +62,13 @@ ActiveRecord::Schema.define(version: 2020_09_15_194712) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "customer_id"
     t.bigint "train_id"
+    t.bigint "first_station_id"
+    t.bigint "last_station_id"
+    t.string "customer_name"
+    t.string "passport"
     t.index ["customer_id"], name: "index_tickets_on_customer_id"
+    t.index ["first_station_id"], name: "index_tickets_on_first_station_id"
+    t.index ["last_station_id"], name: "index_tickets_on_last_station_id"
     t.index ["train_id"], name: "index_tickets_on_train_id"
   end
 
@@ -55,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_194712) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "current_station_id"
     t.bigint "route_id"
+    t.boolean "sorted"
     t.index ["current_station_id"], name: "index_trains_on_current_station_id"
     t.index ["route_id"], name: "index_trains_on_route_id"
   end

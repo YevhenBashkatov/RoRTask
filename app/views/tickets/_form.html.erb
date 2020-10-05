@@ -1,0 +1,36 @@
+
+<%= form_for [@train, @ticket] do |form| %>
+  <%= render "common/errors", resource: @ticket %>
+  <div class="field">
+    <%= form.label :customer_id %>
+    <%= form.text_field :customer_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :passport %>
+    <%= form.text_field :passport%>
+  </div>
+  <div class="field">
+    <%= form.label :customer_name %>
+    <%= form.text_field :customer_name %>
+  </div>
+  <div class="field">
+    <%= form.label :train_id %>
+    <%= form.hidden_field(:train_id, value: @train.id)  %>
+  </div>
+  <div class="field">
+    <%= form.hidden_field(:first_station_id, value: @first_station.id) %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field(:last_station_id, value: @last_station.id) %>
+  </div>
+
+
+
+
+
+  <div class = "field">
+  <%= form.submit "Buy" %>
+  </div>
+<% end %>
