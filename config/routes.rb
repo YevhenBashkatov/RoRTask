@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :trains do
+    resources :tickets
     resources :railway_carriages, shallow: true
   end
   resources :railway_stations do
@@ -11,13 +12,16 @@ Rails.application.routes.draw do
   resources :railway_carriages
   resources :welcomes
 
-  resource :searchers do
+  resources :tickets
 
+  resources :customers
+
+  resource :search, only: %i[show new edit] do
+    post '/', to: 'searches#search'
   end
 
   # get 'welcomes/index'
-  get 'searchers/show'
   # root 'welcomes#index'
-  root 'searchers#show'
+  root 'searches#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

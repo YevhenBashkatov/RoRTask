@@ -1,6 +1,6 @@
 class RailwayCarriagesController < ApplicationController
   before_action :set_railway_carriage, only: %i[show edit update destroy]
-  before_action :set_train, only: %i[create update destroy]
+  before_action :set_train, only: %i[create new]
 
   def index
     @railway_carriages = RailwayCarriage.all
@@ -37,7 +37,7 @@ class RailwayCarriagesController < ApplicationController
     redirect_to railway_carriages_path
   end
 
-  private
+  protected
 
   def set_railway_carriage
     @railway_carriage = RailwayCarriage.find(params[:id])

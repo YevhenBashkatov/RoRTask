@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_30_074625) do
+ActiveRecord::Schema.define(version: 2020_10_02_183653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 2020_09_30_074625) do
   create_table "customers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
   end
 
   create_table "railway_carriages", force: :cascade do |t|
-    t.string "number"
+    t.integer "number"
     t.integer "side_seats_up"
     t.integer "side_seats_down"
     t.integer "sitting_seats"
@@ -63,6 +64,8 @@ ActiveRecord::Schema.define(version: 2020_09_30_074625) do
     t.bigint "train_id"
     t.bigint "first_station_id"
     t.bigint "last_station_id"
+    t.string "customer_name"
+    t.string "passport"
     t.index ["customer_id"], name: "index_tickets_on_customer_id"
     t.index ["first_station_id"], name: "index_tickets_on_first_station_id"
     t.index ["last_station_id"], name: "index_tickets_on_last_station_id"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Route < ActiveRecord::Base
   validates :name, presence: true
   validate :station_count
@@ -8,10 +10,10 @@ class Route < ActiveRecord::Base
 
   before_validation :set_name
 
+  scope :include_station, ->(railway_station) { Route.joins(:railway_stations).where('railway_station_id = ?', railway_station.id) }
 
-
-  def self.find_by_stations(first_station,last_station)
-    @routes.select(:id).where(railway_stations.title.first == first_station.title && railway_stations.title.last == last_station.title)
+  def self.find_by_stations(first_station, last_station)
+    Route.include_station(first_station) & Route.include_station(last_station)
   end
 
   private
